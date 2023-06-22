@@ -1,7 +1,10 @@
 import { serveFiles } from "./serve_files.ts";
 
 serveFiles(
-    './client',
-    'index.html',
+    {
+        rootDirectory: './client',
+        defaultFile: 'index.html',
+        notFound: '404.html'
+    },
     { port: 80 }
 );
