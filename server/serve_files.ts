@@ -1,31 +1,38 @@
+import { contentTypes } from "./routing/content_types.ts";
 import { getContentType } from "./routing/get_content_type.ts";
 import { parsePath } from "./routing/parse_path.ts";
 
 export function serveFiles(
-    rootDirectory : string,
-    defaultFile : string,
+    directories : {
+        rootDirectory : string,
+        defaultFile : string,
+        notFound : string
+    },
     options: Deno.ServeOptions | Deno.ServeTlsOptions
 ) {
     Deno.serve(
         options,
         async (request) => {
             const requestURL = new URL(request.url);
-            const defaultPath = parsePath(requestURL.pathname, defaultFile);
-            const contentType = getContentType(defaultPath, '*/*');
+            const defaultPath = parsePath(requestURL.pathname, directories.defaultFile);
+            let contentType = getContentType(defaultPath, '*/*');
+            let file : Uint8Array;
 
             try {
-                const file = await Deno.readFile(rootDirectory + defaultPath);
-                
-                return new Response(file, {
-                    headers: { 'content-type': contentType }
-                });
+                file = await Deno.readFile(directories.rootDirectory + defaultPath);
             } catch(error) {
                 if (error instanceof Deno.errors.NotFound) {
-                    return new Response('File not found!');
+                    file = await Deno.readFile(directories.rootDirectory + '/' + directories.notFound);
+                    contentType = contentTypes['html']
                 } else {
-                    return new Response(error);
+                    file = error
+                    contentType = contentTypes['js']
                 }
             }
+
+            return new Response(file, {
+                headers: { 'content-type': contentType }
+            });
         }
     );
 }
