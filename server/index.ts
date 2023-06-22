@@ -1,8 +1,7 @@
-import { serverFiles } from "./serve_files.ts";
+import { serveFiles } from "./serve_files.ts";
 
-serverFiles(
+serveFiles(
     './client',
-    {
-        port: 80
-    }
+    'index.html',
+    { port: 80 }
 );
