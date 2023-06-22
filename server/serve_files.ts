@@ -1,8 +1,9 @@
-export function serverFiles() {
-    Deno.serve({
-        port: 80
-    }, () => {
-        return new Response()
-    })
+export function serverFiles(options: Deno.ServeOptions | Deno.ServeTlsOptions) {
+    Deno.serve(
+        options,
+        () => {
+            return new Response()
+        }
+    );
 }
 
