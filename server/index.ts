@@ -1,4 +1,4 @@
-import { serveFiles } from "./serve_files.ts";
+import { serveFiles } from "./routing/serve_files.ts";
 
 serveFiles(
     {
