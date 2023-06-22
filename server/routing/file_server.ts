@@ -4,9 +4,9 @@ import { parsePath } from "./parse_path.ts";
 
 export function FileServer(
     directories : {
-        rootDirectory : string,
         defaultFile : string,
-        notFound : string
+        rootDirectory : string,
+        notFoundDirectory : string
     },
     options: Deno.ServeOptions | Deno.ServeTlsOptions
 ) {
@@ -22,7 +22,7 @@ export function FileServer(
                 file = await Deno.readFile(directories.rootDirectory + defaultPath);
             } catch(error) {
                 if (error instanceof Deno.errors.NotFound) {
-                    file = await Deno.readFile(directories.rootDirectory + '/' + directories.notFound);
+                    file = await Deno.readFile(directories.rootDirectory + '/' + directories.notFoundDirectory);
                     contentType = contentTypes['html']
                 } else {
                     file = error
