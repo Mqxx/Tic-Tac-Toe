@@ -4,7 +4,7 @@ FileServer(
     {
         rootDirectory: './client',
         defaultFile: 'index.html',
-        notFound: '404'
+        notFoundDirectory: '404'
     },
     { port: 80 }
 );
