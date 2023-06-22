@@ -13,9 +13,6 @@ export function serveFiles(
             const defaultPath = parsePath(requestURL.pathname, defaultFile);
             const contentType = getContentType(defaultPath, '*/*');
 
-            console.log(requestURL.pathname, '->', defaultPath, contentType);
-            
-
             try {
                 const file = await Deno.readFile(rootDirectory + defaultPath);
                 
