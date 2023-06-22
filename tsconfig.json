@@ -1,0 +1,13 @@
+{
+    "compilerOptions": {
+        "noImplicitAny": true,
+        "module": "CommonJS",
+        "target": "es6",
+        "sourceMap": true,
+        "allowJs": true,
+        "esModuleInterop": true
+    },
+    "exclude": [
+        "client"
+    ]
+}
