@@ -22,7 +22,7 @@ export function FileServer(
                 file = await Deno.readFile(directories.rootDirectory + defaultPath);
             } catch(error) {
                 if (error instanceof Deno.errors.NotFound) {
-                    file = await Deno.readFile(directories.rootDirectory + '/' + directories.notFoundDirectory);
+                    file = await Deno.readFile(directories.rootDirectory + '/' + directories.notFoundDirectory + '/' + directories.defaultFile);
                     contentType = contentTypes['html']
                 } else {
                     file = error
