@@ -1,15 +1,15 @@
 import { parsePath } from "./routing/parse_path.ts";
 
-export function serverFiles(rootDirectory : string, options: Deno.ServeOptions | Deno.ServeTlsOptions) {
+export function serveFiles(
+    rootDirectory : string,
+    defaultFile : string,
+    options: Deno.ServeOptions | Deno.ServeTlsOptions
+) {
     Deno.serve(
         options,
         async (request) => {
             const requestURL = new URL(request.url)
-            const defaultPath = parsePath(requestURL.pathname, 'index.html')
-            
-
-            console.log('New request from:', requestURL.pathname, '->', defaultPath);
-            
+            const defaultPath = parsePath(requestURL.pathname, defaultFile)
 
             try {
                 const file = await Deno.readFile(rootDirectory + defaultPath);
