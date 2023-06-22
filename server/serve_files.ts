@@ -1,3 +1,4 @@
+import { getContentType } from "./routing/get_content_type.ts";
 import { parsePath } from "./routing/parse_path.ts";
 
 export function serveFiles(
@@ -8,12 +9,21 @@ export function serveFiles(
     Deno.serve(
         options,
         async (request) => {
-            const requestURL = new URL(request.url)
-            const defaultPath = parsePath(requestURL.pathname, defaultFile)
+            const requestURL = new URL(request.url);
+            const defaultPath = parsePath(requestURL.pathname, defaultFile);
+            const contentType = getContentType(defaultPath, '*/*');
+
+            console.log(requestURL.pathname, '->', defaultPath, contentType);
+            
 
             try {
                 const file = await Deno.readFile(rootDirectory + defaultPath);
-                return new Response(file);
+                
+                return new Response(file, {
+                    headers: {
+                        'content-type': contentType
+                    }
+                });
             } catch(error) {
                 if (error instanceof Deno.errors.NotFound) {
                     return new Response('File not found!');
