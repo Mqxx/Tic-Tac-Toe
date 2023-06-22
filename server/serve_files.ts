@@ -17,9 +17,7 @@ export function serveFiles(
                 const file = await Deno.readFile(rootDirectory + defaultPath);
                 
                 return new Response(file, {
-                    headers: {
-                        'content-type': contentType
-                    }
+                    headers: { 'content-type': contentType }
                 });
             } catch(error) {
                 if (error instanceof Deno.errors.NotFound) {
