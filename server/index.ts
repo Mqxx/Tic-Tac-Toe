@@ -1,10 +1,10 @@
-import { serveFiles } from "./routing/serve_files.ts";
+import { FileServer } from "./routing/file_server.ts";
 
-serveFiles(
+FileServer(
     {
         rootDirectory: './client',
         defaultFile: 'index.html',
-        notFound: '404.html'
+        notFound: '404'
     },
     { port: 80 }
 );
