@@ -1,4 +1,4 @@
-import { ContentTypeKey, ContentType, contentTypes } from "./content_types.ts";
+import { ContentTypeKey, ContentType, contentTypes } from "../type/content_types.ts";
 
 /**
  * This function parses a path and returns the content-type corresponding to the path.

@@ -1,4 +1,4 @@
-import { ContentType } from "./content_types.ts";
+import { ContentType } from "../type/content_types.ts";
 import { responseWithContentType } from "./response_with_content_type.ts";
 
 export function readFileFromRequestURL(
