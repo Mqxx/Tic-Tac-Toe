@@ -14,4 +14,3 @@ export function parsePath(path : string, defaultFile : string) : string {
     path = path.replace(/\/{2,}/, '/');
     return path.replace(/^(\/$|(?:\/(?:(?!.*[.].*)[^\/\n])+)+)\/?$/gm, (_, path) => `${path}/${defaultFile}`);
 }
-
