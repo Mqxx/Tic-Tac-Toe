@@ -8,4 +8,4 @@ export const contentTypes = {
 } as const;
 
 export type ContentType = typeof contentTypes[keyof typeof contentTypes]
-export type ContentKey = keyof typeof contentTypes
+export type ContentTypeKey = keyof typeof contentTypes
