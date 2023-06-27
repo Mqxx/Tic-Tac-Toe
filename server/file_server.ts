@@ -7,10 +7,14 @@ export function fileServer(
     Deno.serve(
         options, 
         (request) => {
-            return readFileFromRequestURL(new URL(request.url), getContentType(
-                new URL(request.url).pathname,
-                'html'
-            )
-        );
-    });
+            const requestURL = new URL(request.url)
+            return readFileFromRequestURL(
+                requestURL,
+                getContentType(
+                    requestURL.pathname,
+                    'html'
+                )
+            );
+        }
+    );
 }
