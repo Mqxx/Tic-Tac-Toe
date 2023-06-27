@@ -11,5 +11,7 @@
  * @returns The parse pathname
  */
 export function parsePath(path : string, defaultFile : string) : string {
-    return path.replace(/^((?:\/?[^\.\n\/]+)*)\/?$/gm, (_, group1) => `${group1}/${defaultFile}`);
+    path = path.replace(/\/{2,}/, '/');
+    return path.replace(/^(\/$|(?:\/(?:(?!.*[.].*)[^\/\n])+)+)\/?$/gm, (_, path) => `${path}/${defaultFile}`);
 }
+
