@@ -1,4 +1,4 @@
-import { ContentKey, ContentType, contentTypes } from "./content_types.ts";
+import { ContentTypeKey, ContentType, contentTypes } from "./content_types.ts";
 
 /**
  * This function parses a path and returns the content-type corresponding to the path.
@@ -6,7 +6,7 @@ import { ContentKey, ContentType, contentTypes } from "./content_types.ts";
  * @param defaultType The default content-type which should be used
  * @returns The content-type corresponding to the file
  */
-export function getContentType(path : string, defaultType : ContentKey) : ContentType {
+export function getContentType(path : string, defaultType : ContentTypeKey) : ContentType {
     
     const fileExtenstionFromPath = path.replace(
         /[^\.]+\.([^\.]+)$/,
@@ -14,7 +14,7 @@ export function getContentType(path : string, defaultType : ContentKey) : Conten
     );
 
     if (fileExtenstionFromPath in contentTypes) {
-        return contentTypes[fileExtenstionFromPath as ContentKey]
+        return contentTypes[fileExtenstionFromPath as ContentTypeKey]
     }
 
     return contentTypes[defaultType];
