@@ -6,7 +6,10 @@ import { ContentTypeKey, ContentType, contentTypes } from "../type/content_types
  * @param defaultType The default content-type which should be used
  * @returns The content-type corresponding to the file
  */
-export function getContentType(path : string, defaultType : ContentTypeKey) : ContentType {
+export function getContentType(
+    path : string,
+    defaultType : ContentTypeKey
+) : ContentType {
     
     const fileExtenstionFromPath = path.replace(
         /[^\.]+\.([^\.]+)$/,
