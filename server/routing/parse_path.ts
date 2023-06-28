@@ -11,8 +11,8 @@
  * @returns The parse pathname
  */
 export function parsePath(path : string, defaultFile : string) : string {
-    // replace > '//' with '/'
-    path = path.replace(/\/{2,}/, '/');
     // replace path with no file extension with path to default file
-    return path.replace(/^(\/$|(?:\/(?:(?!.*[.].*)[^\/\n])+)+)\/?$/gm, (_, path) => `${path}/${defaultFile}`);
+    path = path.replace(/^(\/$|(?:\/(?:(?!.*[.].*)[^\/\n])+)+)\/?$/gm, (_, path) => `${path}/${defaultFile}`);
+    // replace > '//' with '/'
+    return path.replace(/\/{2,}/, '/');
 }
