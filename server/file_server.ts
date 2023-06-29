@@ -1,5 +1,5 @@
 import { getContentType } from "./routing/get_content_type.ts";
-import { parsePath } from "./routing/parse_path.ts";
+import { pathDefaultFile } from "./routing/path_default_file.ts";
 import { readFileFromRequestURL } from "./routing/read_file_from_request_url.ts";
 
 export function fileServer(
@@ -12,7 +12,7 @@ export function fileServer(
         options, 
         (request) => {
             const requestURL = new URL(request.url)
-            const parsedPath = parsePath(requestURL.pathname, directory.defaultFile);
+            const parsedPath = pathDefaultFile(requestURL.pathname, directory.defaultFile);
             return readFileFromRequestURL(
                 parsedPath,
                 getContentType(
