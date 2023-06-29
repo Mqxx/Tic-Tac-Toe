@@ -1,3 +1,5 @@
+import { normalizePath } from "./normalize_path.ts";
+
 /**
  * This function takes a path and returns the path fith the default file.
  * If the path is already a path to a file than this path is returned.
@@ -11,7 +13,7 @@
  */
 export function pathDefaultFile(path : string, defaultFile : string) {
     const regExMatchValidPath = /(.+(?<!\.[^/]+)$)/
-    return path.replace(
+    return normalizePath(path.replace(
         regExMatchValidPath,
         (
             _,
@@ -19,5 +21,5 @@ export function pathDefaultFile(path : string, defaultFile : string) {
         ) => {
             return path + '/' + defaultFile;
         }
-    )
+    ));
 }
