@@ -12,7 +12,7 @@ export function fileServer(
     }
 ) {
     Deno.serve(
-        options, 
+        options,
         (request) => {            
             const requestURL = new URL(request.url);
             
