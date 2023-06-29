@@ -1,17 +1,24 @@
-import { ContentType } from "../type/content_types.ts";
-import { responseWithContentType } from "./response_with_content_type.ts";
-
+/**
+ * 
+ * @param requestPath The path of the request
+ * @param fallbackPath The fallback path if the request path is not found
+ * @returns 
+ */
 export function readFileFromRequestURL(
-    requestURL : string,
-    contentType : ContentType
-) : Response {
+    requestPath : string,
+    fallbackPath : string
+) : Uint8Array {
     try {
-        return responseWithContentType(requestURL, contentType);
+        return Deno.readFileSync(requestPath);
     } catch (error) {
         if (error instanceof Deno.errors.NotFound) {
-            return responseWithContentType(requestURL, contentType);
+            try {
+                return Deno.readFileSync(fallbackPath);
+            } catch (error) {
+                return error;
+            }
         } else {
-            return responseWithContentType(requestURL, contentType);
+            return error;
         }
     }
 }
