@@ -13,7 +13,7 @@ export function fileServer(
 ) {
     Deno.serve(
         options,
-        (request) => {            
+        (request) => {
             const requestURL = new URL(request.url);
             
             const referer = request.headers.get('referer');
