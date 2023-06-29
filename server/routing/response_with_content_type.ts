@@ -1,11 +1,11 @@
 import { ContentType } from "../type/content_types.ts";
 
 export function responseWithContentType(
-    path : string,
+    body : BodyInit,
     contentType : ContentType
 ) {
     return new Response(
-        Deno.readFileSync(path),
+        body,
         {
             headers: {
                 'content-type': contentType
