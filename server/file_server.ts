@@ -14,8 +14,18 @@ export function fileServer(
     Deno.serve(
         options, 
         (request) => {
-            const requestURL = new URL(request.url)
-            const parsedPath = pathDefaultFile(directory.root + '/' + requestURL.pathname, directory.defaultFile);
+            const requestURL = new URL(request.url);
+            
+            const referer = request.headers.get('referer')
+
+            let path = ''
+
+            if (referer) {
+                path = new URL(referer).pathname;
+            }
+            
+            const parsedPath = pathDefaultFile(directory.root + '/' + path + requestURL.pathname, directory.defaultFile);
+
             return responseWithContentType(
                 readFileFromRequestURL(
                     parsedPath,
