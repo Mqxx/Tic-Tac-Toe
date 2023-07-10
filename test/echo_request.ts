@@ -10,7 +10,7 @@ function getHeader(header : Headers) {
 Deno.serve({
     port: 80
 }, (request) => {
-    console.log(request);
+    
 
     const response = {
         url: request.url,
@@ -34,10 +34,22 @@ Deno.serve({
         headers: getHeader(request.headers),
     }
 
-    return new Response(JSON.stringify(
-        response,
-        null,
-        4
-    ));
+    console.log(request);
+    
+    const file = Deno.readFileSync('.' + new URL(request.url).pathname)
+
+    try {
+        return new Response(new TextEncoder().encode(new TextDecoder().decode(file).replace(
+            '{request}',
+            JSON.stringify(
+                response,
+                null,
+                4
+            )
+        )));
+    } catch (e) {
+        console.log(e);
+        return new Response(e)
+    }
 })
 
